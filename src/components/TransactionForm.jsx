@@ -13,52 +13,63 @@ function TransactionForm({ onAddTransaction }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleAmountChange = (e) => {
+    // Hanya ambil angka (hapus titik atau karakter lain)
+    const rawValue = e.target.value.replace(/\D/g, '');
+    setFormData({ ...formData, amount: rawValue });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddTransaction({ ...formData, amount: parseFloat(formData.amount) });
+    onAddTransaction({ ...formData, amount: parseFloat(formData.amount) || 0 });
     setFormData({ title: '', amount: '', type: 'expense', category: '' });
   };
 
+  // Format angka dengan pemisah ribuan (titik untuk locale Indonesia)
+  const displayAmount = formData.amount ? parseInt(formData.amount, 10).toLocaleString('id-ID') : '';
+
   return (
-    <div className="bg-white border-4 border-black p-6 shadow-brutal h-fit w-full">
-      <div className="bg-black text-white p-3 mb-6 -mt-6 -mx-6 border-b-4 border-black flex justify-center">
-        <h3 className="text-xl font-black uppercase tracking-wider">Input Transaksi</h3>
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div className="px-6 py-5 border-b border-slate-100">
+        <h3 className="text-lg font-semibold text-slate-800">Input Transaksi Baru</h3>
+        <p className="text-sm text-slate-500 mt-1">Catat aktivitas keuangan Anda</p>
       </div>
       
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="p-6 space-y-4">
         <div>
-          <label className="block text-sm font-bold text-black mb-2 uppercase">Keterangan</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1.5">Keterangan</label>
           <input type="text" name="title" required value={formData.title} onChange={handleInputChange} 
-            className="w-full px-4 py-3 border-4 border-black focus:outline-none focus:ring-0 focus:bg-gray-100 font-bold text-lg" 
-            placeholder="MISAL: BELI KOPI" />
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-800" 
+            placeholder="Misal: Beli Kopi" />
         </div>
         
         <div>
-          <label className="block text-sm font-bold text-black mb-2 uppercase">Nominal (Rp)</label>
-          <input type="number" name="amount" required value={formData.amount} onChange={handleInputChange} 
-            className="w-full px-4 py-3 border-4 border-black focus:outline-none focus:ring-0 focus:bg-gray-100 font-bold text-lg" 
-            placeholder="50000" />
+          <label className="block text-sm font-medium text-slate-700 mb-1.5">Nominal (Rp)</label>
+          <input type="text" name="amount" required value={displayAmount} onChange={handleAmountChange} 
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-800" 
+            placeholder="50.000" />
         </div>
         
         <div>
-          <label className="block text-sm font-bold text-black mb-2 uppercase">Tipe</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1.5">Tipe</label>
           <select name="type" value={formData.type} onChange={handleInputChange} 
-            className="w-full px-4 py-3 border-4 border-black focus:outline-none focus:ring-0 focus:bg-gray-100 font-bold text-lg bg-white appearance-none cursor-pointer">
-            <option value="expense">PENGELUARAN</option>
-            <option value="income">PEMASUKAN</option>
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-800 bg-white cursor-pointer">
+            <option value="expense">Pengeluaran</option>
+            <option value="income">Pemasukan</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-black mb-2 uppercase">Kategori</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1.5">Kategori</label>
           <input type="text" name="category" required value={formData.category} onChange={handleInputChange} 
-            className="w-full px-4 py-3 border-4 border-black focus:outline-none focus:ring-0 focus:bg-gray-100 font-bold text-lg" 
-            placeholder="MAKANAN" />
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all text-slate-800" 
+            placeholder="Misal: Makanan, Transport, dll" />
         </div>
         
         <button type="submit" 
-          className="w-full bg-[#facc15] hover:bg-yellow-300 text-black font-black uppercase tracking-widest py-4 border-4 border-black shadow-brutal active:shadow-brutal-hover active:translate-y-[2px] active:translate-x-[2px] transition-all mt-4">
-          SIMPAN DATA
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg shadow-sm hover:shadow-md transition-all mt-6 flex justify-center items-center gap-2">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+          Simpan Transaksi
         </button>
       </form>
     </div>

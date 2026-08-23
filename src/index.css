@@ -2,21 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-body {/* Custom Scrollbar bergaya Neo-Brutalism */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 16px;
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+  }
 }
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-left: 4px solid #000;
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #facc15;
-  border-left: 4px solid #000;
-  border-bottom: 4px solid #000;
+
+/* Custom animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
 }
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #000;
+
+.animate-blob {
+  animation: blob 7s infinite;
 }
-  background-color: #f3f4f6;
+
+/* Optional: Clean minimal scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400;
 }

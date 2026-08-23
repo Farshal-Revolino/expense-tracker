@@ -2,23 +2,39 @@
 
 function BalanceCard({ income, expense, balance }) {
   return (
-    <div className="bg-[#facc15] border-4 border-black p-8 rounded-none shadow-brutal flex flex-col md:flex-row justify-between items-center w-full max-w-4xl mx-auto mt-8 mb-12">
-      <div className="text-center md:text-left mb-6 md:mb-0 w-full md:w-1/2">
-        <h3 className="text-xl font-black text-black uppercase tracking-widest border-b-4 border-black pb-2 mb-4 inline-block">TOTAL SALDO</h3>
-        <p className="text-5xl font-black text-black tracking-tighter">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Total Saldo Card */}
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-center">
+        <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-1">Total Saldo</h3>
+        <p className={`text-3xl font-bold ${balance >= 0 ? 'text-slate-800' : 'text-red-600'}`}>
           Rp {balance.toLocaleString('id-ID')}
         </p>
       </div>
       
-      <div className="flex flex-col sm:flex-row gap-6 w-full md:w-1/2 justify-end">
-        <div className="bg-white border-4 border-black p-4 shadow-brutal w-full sm:w-1/2 text-center">
-          <h4 className="text-sm font-black text-black uppercase mb-2">PEMASUKAN</h4>
-          <p className="text-2xl font-black text-green-600">Rp {income.toLocaleString('id-ID')}</p>
+      {/* Pemasukan Card */}
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-center">
+        <div className="flex items-center gap-2 mb-1">
+          <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+            <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+          </div>
+          <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wider">Pemasukan</h3>
         </div>
-        <div className="bg-white border-4 border-black p-4 shadow-brutal w-full sm:w-1/2 text-center">
-          <h4 className="text-sm font-black text-black uppercase mb-2">PENGELUARAN</h4>
-          <p className="text-2xl font-black text-red-600">Rp {expense.toLocaleString('id-ID')}</p>
+        <p className="text-2xl font-bold text-slate-800">
+          Rp {income.toLocaleString('id-ID')}
+        </p>
+      </div>
+
+      {/* Pengeluaran Card */}
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-center">
+        <div className="flex items-center gap-2 mb-1">
+          <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
+            <svg className="w-3.5 h-3.5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+          </div>
+          <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wider">Pengeluaran</h3>
         </div>
+        <p className="text-2xl font-bold text-slate-800">
+          Rp {expense.toLocaleString('id-ID')}
+        </p>
       </div>
     </div>
   );
