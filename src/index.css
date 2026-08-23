@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {/* Custom Scrollbar bergaya Neo-Brutalism */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 16px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 4px solid #000;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #facc15;
+  border-left: 4px solid #000;
+  border-bottom: 4px solid #000;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #000;
+}
+  background-color: #f3f4f6;
+}
