@@ -16,7 +16,7 @@ export default function BottomNav({ currentTab, setCurrentTab }) {
             onClick={() => setCurrentTab(item.id)}
             className={`flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all duration-200 min-w-[56px] ${
               currentTab === item.id
-                ? 'text-emerald-500 dark:text-emerald-400 bg-emerald-500/10'
+                ? 'text-blue-600 dark:text-blue-400 bg-blue-600/10 dark:bg-blue-400/10'
                 : 'text-slate-400 dark:text-slate-500'
             }`}
           >
